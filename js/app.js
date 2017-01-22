@@ -13,13 +13,25 @@ var ViewModel = function() {
 		if (curCount >= 20) {
 			level = 'Teen';
 		}
-
 		return level;
 	}, this);
 
 	this.incrementCounter = function() {
 		this.clickCount(this.clickCount() + 1);
 	};
+
+	this.nicknames = ko.observableArray([{
+			nickname: 'DMG'
+		},
+		{
+			nickname: 'Damage'
+		},
+		{
+			nickname: 'Derky Jerky'
+		}
+	]);
+
+
 }
 
 ko.applyBindings(new ViewModel());
