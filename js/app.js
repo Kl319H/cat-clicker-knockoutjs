@@ -1,4 +1,13 @@
 var ViewModel = function() {
+	this.currentCat = ko.observable(new Cat());
+
+	this.incrementCounter = function() {
+		var cat = this.currentCat();
+		cat.clickCount(cat.clickCount() + 1);
+	};
+}
+
+var Cat = function() {
 	this.clickCount = ko.observable(0);
 	this.name = ko.observable('Derk');
 	this.imgSrc = ko.observable('https://imgflip.com/s/meme/Cute-Cat.jpg');
@@ -16,10 +25,6 @@ var ViewModel = function() {
 		return level;
 	}, this);
 
-	this.incrementCounter = function() {
-		this.clickCount(this.clickCount() + 1);
-	};
-
 	this.nicknames = ko.observableArray([{
 			nickname: 'DMG'
 		},
@@ -30,8 +35,6 @@ var ViewModel = function() {
 			nickname: 'Derky Jerky'
 		}
 	]);
-
-
 }
 
 ko.applyBindings(new ViewModel());
