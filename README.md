@@ -1,4 +1,4 @@
-ud989-cat-clicker-ko-starter
+Cat Clicker using Knockoutjs
 ============================
 
-ud989-cat-clicker-ko-starter
+Assignment ud989-cat-clicker-ko-starter
