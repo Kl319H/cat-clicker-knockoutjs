@@ -1,17 +1,8 @@
-var ViewModel = function() {
-	this.currentCat = ko.observable(new Cat());
-
-	this.incrementCounter = function() {
-		var cat = this.currentCat();
-		cat.clickCount(cat.clickCount() + 1);
-	};
-}
-
-var Cat = function() {
-	this.clickCount = ko.observable(0);
-	this.name = ko.observable('Derk');
-	this.imgSrc = ko.observable('https://imgflip.com/s/meme/Cute-Cat.jpg');
-	this.imgAttribution = ko.observable('https://imgflip.com/s/meme/Cute-Cat.jpg');
+var Cat = function(data) {
+	this.clickCount = ko.observable(data.clickCount);
+	this.name = ko.observable(data.name);
+	this.imgSrc = ko.observable(data.imgSrc);
+	this.imgAttribution = ko.observable(data.imgAttribution);
 
 	this.catLevel = ko.computed(function() {
 		var curCount = this.clickCount();
@@ -25,16 +16,31 @@ var Cat = function() {
 		return level;
 	}, this);
 
-	this.nicknames = ko.observableArray([{
-			nickname: 'DMG'
-		},
-		{
-			nickname: 'Damage'
-		},
-		{
-			nickname: 'Derky Jerky'
-		}
-	]);
+	this.nicknames = ko.observableArray(data.nicknames);
 }
+
+
+var ViewModel = function() {
+	var self = this;
+
+	this.catList = ko.observableArray([]);
+
+	cats.forEach(function(cat, i) {
+		self.catList.push(new Cat(cat));
+	});
+
+	this.currentCat = ko.observable(this.catList()[0]);
+
+	this.incrementCounter = function() {
+		var cat = this;
+		cat.clickCount(cat.clickCount() + 1);
+	};
+
+	this.setCurrentCat = function(cat) {
+		self.currentCat(cat);
+	}
+}
+
+
 
 ko.applyBindings(new ViewModel());
